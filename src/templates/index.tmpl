@@ -31,46 +31,16 @@
             addTag('link', {rel: 'stylesheet', href: 'css/docs.css', type: 'text/css'});
             addTag('link', {rel: 'stylesheet', href: 'css/animations.css', type: 'text/css'});
 
-
-            addTag('link', {rel: 'stylesheet', href: '../lib/bootstrap/dist/css/bootstrap.css', type: 'text/css'}, sync);
-
-            addTag('link', {rel: 'stylesheet', href: '../dist/isComponents.css', type: 'text/css'}, sync);
-
+            <% _.forEach(styles, function(url) { %>
+                addTag('link', {rel: 'stylesheet', href: '<%= url %>', type: 'text/css'}, sync);
+                <% }); %>
 
             addTag('script', {src: 'js/google-code-prettify.js'}, sync);
             addTag('script', {src: 'js/marked.js'}, sync);
 
-
-            addTag('script', {src: '../lib/jquery/dist/jquery.js'}, sync);
-
-            addTag('script', {src: '../lib/angular/angular.js'}, sync);
-
-            addTag('script', {src: '../lib/angular-animate/angular-animate.js'}, sync);
-
-            addTag('script', {src: '../lib/angular-cookies/angular-cookies.js'}, sync);
-
-            addTag('script', {src: '../lib/angular-resource/angular-resource.js'}, sync);
-
-            addTag('script', {src: '../lib/angular-route/angular-route.js'}, sync);
-
-            addTag('script', {src: '../lib/angular-sanitize/angular-sanitize.js'}, sync);
-
-            addTag('script', {src: '../lib/angular-touch/angular-touch.js'}, sync);
-
-            addTag('script', {src: '../lib/angular-gettext/dist/angular-gettext.js'}, sync);
-
-            addTag('script', {src: '../lib/ng-grid/build/ng-grid.debug.js'}, sync);
-
-            addTag('script', {src: '../lib/lodash/dist/lodash.js'}, sync);
-
-            addTag('script', {src: '../lib/restangular/dist/restangular.js'}, sync);
-
-            addTag('script', {src: '../lib/tv4/tv4.js'}, sync);
-
-            addTag('script', {src: '../lib/angular-bootstrap/ui-bootstrap.js'}, sync);
-
-            addTag('script', {src: '../dist/isComponents.js'}, sync);
-
+            <% _.forEach(scripts, function(url) { %>
+                addTag('script', {src: '<%= url %>'}, sync);
+                <% }); %>
 
             addTag('script', {src: 'js/angular-bootstrap.js'}, sync);
             addTag('script', {src: 'js/angular-bootstrap-prettify.js'}, sync);
