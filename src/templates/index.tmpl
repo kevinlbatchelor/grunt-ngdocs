@@ -38,9 +38,11 @@
             addTag('script', {src: 'js/google-code-prettify.js'}, sync);
             addTag('script', {src: 'js/marked.js'}, sync);
 
+            /*these get the dependencies*/
             <% _.forEach(scripts, function(url) { %>
                 addTag('script', {src: '<%= url %>'}, sync);
                 <% }); %>
+
 
             addTag('script', {src: 'js/angular-bootstrap.js'}, sync);
             addTag('script', {src: 'js/angular-bootstrap-prettify.js'}, sync);
