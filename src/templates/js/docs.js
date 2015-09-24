@@ -120,11 +120,26 @@ docsApp.serviceFactory.loadedUrls = function($document) {
     }
   });
 
-  urls.base = [];
+  angular.forEach($document.find('link'), function(script) {
+    var match = script.href.match(/^.*\/([^\/]*\.css)$/);
+    if (match) {
+      urls[match[1].replace(/(\-\d.*)?(\.min)?\.css$/, '.css')] = match[0];
+    }
+  });
+
+  urls.js = [];
   angular.forEach(NG_DOCS.scripts, function(script) {
     var match = urls[script.replace(/(\-\d.*)?(\.min)?\.js$/, '.js')];
     if (match) {
-      urls.base.push(match);
+      urls.js.push(match);
+    }
+  });
+
+  urls.css = [];
+  angular.forEach(NG_DOCS.styles, function(style) {
+    var match = urls[style.replace(/(\-\d.*)?(\.min)?\.css$/, '.css')];
+    if (match) {
+      urls.css.push(match);
     }
   });
 
@@ -159,8 +174,11 @@ docsApp.serviceFactory.openPlunkr = function(templateMerge, formPostData, loaded
         '  </body>\n' +
         '</html>\n';
     var scriptDeps = '';
-    angular.forEach(loadedUrls.base, function(url) {
-        scriptDeps += '    <script src="' + url + '"></script>\n';
+    angular.forEach(loadedUrls.js, function(url) {
+      scriptDeps += '    <script src="' + url + '"></script>\n';
+    });
+    angular.forEach(loadedUrls.css, function(url) {
+      scriptDeps += '    <link rel="stylesheet" href="' + url + '" type="text/css">\n';
     });
     angular.forEach(allFiles, function(file) {
       var ext = file.name.split(/\./).pop();
